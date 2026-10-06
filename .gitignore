@@ -1,0 +1,15 @@
+.venv/
+.env
+.rag_data/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.DS_Store
+graphify-out/
+user_input/*
+!user_input/.gitkeep
+
+# DeepEval generated files
+.deepeval/
+.deepeval*

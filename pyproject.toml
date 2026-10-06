@@ -1,0 +1,40 @@
+[project]
+name = "rag"
+version = "0.1.0"
+description = "Index and search local documents with OpenAI embeddings."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "openai",
+    "openpyxl",
+    "pydantic",
+    "pydantic-settings",
+    "pypdf",
+    "python-docx",
+    "qdrant-client",
+]
+
+[project.scripts]
+rag-search = "rag.cli:main"
+
+[project.optional-dependencies]
+test = ["pytest"]
+eval = ["pytest", "deepeval>=4.2.8,<5"]
+analysis = ["graphifyy==0.9.77"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+# Metrics run directly; keep DeepEval's report plugin out of ordinary pytest runs.
+addopts = "-ra -p no:deepeval"
+markers = [
+    "integration: tests that require external services such as Qdrant",
+    "rag_eval: opt-in RAG evaluation requiring documents and paid model calls",
+]
